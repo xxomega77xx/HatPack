@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <Version>1.0.0</Version>
+        <Version>1.1.0</Version>
         <Mappings>NuclearPowered/Mappings:0.4.0</Mappings>
 
-        <Description>Mod testing</Description>
+        <Description>Custom streamer mod created for BergMiester</Description>
         <Authors>Om3Ga</Authors>
     </PropertyGroup>
 
