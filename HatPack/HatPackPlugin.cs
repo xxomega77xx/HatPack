@@ -76,18 +76,17 @@ namespace HatPack
             private static int HatID = 0;
 
             private static HatBehaviour CreateHat(Sprite sprite, Sprite climb = null, Sprite floor = null)
-            {                
+            {
+                var newHat = ScriptableObject.CreateInstance<HatBehaviour>();
+                newHat.MainImage = sprite;
+                newHat.ProductId = $"hat_{sprite.name}";
+                newHat.Order = 99 + HatID;
+                newHat.InFront = true;
+                newHat.NoBounce = true;
+                newHat.FloorImage = floor;
+                newHat.ClimbImage = climb;
 
-                return new HatBehaviour
-                {
-                    MainImage = sprite,
-                    ProductId = $"hat_{sprite.name}",
-                    InFront = true,
-                    NoBounce = true,
-                    Order = 99 + HatID,
-                    ClimbImage = climb,
-                    FloorImage = floor
-                };
+                return newHat;
             }
         }
 
