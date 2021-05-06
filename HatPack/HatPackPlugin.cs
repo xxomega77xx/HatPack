@@ -40,6 +40,7 @@ namespace HatPack
                     
                     foreach (string hatName in customHatNames)
                     {
+                        HatID++;
                         if (floorHatNames.Contains($"{hatName}.dead") && climbHatNames.Contains($"{hatName}.climb"))
                         {
                             string floorHat = $"{hatName}.dead";
@@ -72,6 +73,8 @@ namespace HatPack
             private static Sprite GetSprite(string name)
                 => Assets.LoadAsset(name).Cast<GameObject>().GetComponent<SpriteRenderer>().sprite;
 
+            private static int HatID = 0;
+
             private static HatBehaviour CreateHat(Sprite sprite, Sprite climb = null, Sprite floor = null)
             {                
 
@@ -81,6 +84,7 @@ namespace HatPack
                     ProductId = $"hat_{sprite.name}",
                     InFront = true,
                     NoBounce = true,
+                    Order = 99 + HatID,
                     ClimbImage = climb,
                     FloorImage = floor
                 };
