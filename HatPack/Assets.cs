@@ -13,11 +13,8 @@ namespace HatPack
 
         public static void LoadAssetBundle()
         {
-            //FileLog.logPath = @"C:\AmongUsModded\BepInEx\ModLogs\BunkerLog.log";
-            //FileLog.Log("Loading Asset Bundle");
             byte[] bundleRead = Assembly.GetCallingAssembly().GetManifestResourceStream("HatPack.HatPackAssets.assetbundle").ReadFully();
             AssetBundle = AssetBundle.LoadFromMemory(bundleRead);
-            //FileLog.Log("Asset Bundle Loaded");
 
         }
 

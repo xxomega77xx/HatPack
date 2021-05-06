@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace HatPack
 {
-    [BepInPlugin(Id , "HatPack", "1.2.0")]
+    [BepInPlugin(Id , "HatPack", "1.3.0")]
     [BepInProcess("Among Us.exe")]
     [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
@@ -28,7 +28,6 @@ namespace HatPack
         {
             public static void Prefix(PlayerControl __instance)
             {
-                //FileLog.logPath = @"C:\AmongUsModded\BepInEx\ModLogs\BunkerLog.log";
                 if (!_customHatsLoaded)
                 {
                     var allHats = HatManager.Instance.AllHats;
@@ -36,7 +35,6 @@ namespace HatPack
                     var customHatNames = new[] { "panda", "carrot", "raddish", "reaper" };
                     string[] climbHatNames = { "reaper.climb" };
                     string[] floorHatNames = { "reaper.dead" };
-                    //FileLog.Log($"Number of hats : { customHatNames.Length}");
                     
                     foreach (string hatName in customHatNames)
                     {
@@ -45,18 +43,11 @@ namespace HatPack
                         {
                             string floorHat = $"{hatName}.dead";
                             string climbHat = $"{hatName}.climb";
-
-                            //FileLog.Log($"Climbhat : {climbHat}");
-                            //FileLog.Log($"Floorhat : {floorHat}");
-                            //FileLog.Log($"Creating : {hatName}");
                             allHats.Add(CreateHat(GetSprite(hatName), GetSprite(climbHat), GetSprite(floorHat)));
-                            //FileLog.Log($"Hat Created : {hatName}");
                         }
                         else
                         {
-                            //FileLog.Log($"Creating : {hatName}");
                             allHats.Add(CreateHat(GetSprite(hatName)));
-                            //FileLog.Log($"Hat Created : {hatName}");
                         }
 
                         
@@ -66,7 +57,6 @@ namespace HatPack
                     
 
                     _customHatsLoaded = true;
-                    //FileLog.Log($"CustomHats Loaded : {_customHatsLoaded}");
                 }
             }
 
