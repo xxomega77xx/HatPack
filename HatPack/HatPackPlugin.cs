@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace HatPack
 {
-    [BepInPlugin(Id , "HatPack", "1.1.0")]
+    [BepInPlugin(Id , "HatPack", "1.2.0")]
     [BepInProcess("Among Us.exe")]
     [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
