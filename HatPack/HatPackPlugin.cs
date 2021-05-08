@@ -75,6 +75,7 @@ namespace HatPack
                 newHat.NoBounce = true;
                 newHat.FloorImage = floor;
                 newHat.ClimbImage = climb;
+                newHat.ChipOffset = new Vector2(-0.1f, 0.4f);
 
                 return newHat;
             }
