@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace HatPack
 {
-    [BepInPlugin(Id , "HatPack", "1.4.0")]
+    [BepInPlugin(Id , "HatPack", "1.5.0")]
     [BepInProcess("Among Us.exe")]
     [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
@@ -32,9 +32,10 @@ namespace HatPack
                 {
                     var allHats = HatManager.Instance.AllHats;
 
-                    var customHatNames = new[] { "panda", "carrot", "raddish", "reaper" };
-                    string[] climbHatNames = { "reaper.climb" };
-                    string[] floorHatNames = { "reaper.dead" };
+                    var customHatNames = new[] { "panda", "carrot", "raddish", "reaper","jhin","vadar","poly" };
+                    string[] climbHatNames = { "reaper.climb","jhin.climb","vadar.climb","poly.climb" };
+                    string[] floorHatNames = { "reaper.dead","jhin.dead","vadar.dead","poly.dead" };
+                    string[] bouncehatNames = { "vadar", "poly" };
                     
                     foreach (string hatName in customHatNames)
                     {
@@ -43,7 +44,15 @@ namespace HatPack
                         {
                             string floorHat = $"{hatName}.dead";
                             string climbHat = $"{hatName}.climb";
-                            allHats.Add(CreateHat(GetSprite(hatName), GetSprite(climbHat), GetSprite(floorHat)));
+                            if (bouncehatNames.Contains(hatName))
+                            {
+                                allHats.Add(CreateHat(GetSprite(hatName), GetSprite(climbHat), GetSprite(floorHat),true));
+                            }
+                            else
+                            {
+                                allHats.Add(CreateHat(GetSprite(hatName), GetSprite(climbHat), GetSprite(floorHat)));
+                            }
+                            
                         }
                         else
                         {
@@ -65,14 +74,14 @@ namespace HatPack
 
             private static int HatID = 0;
 
-            private static HatBehaviour CreateHat(Sprite sprite, Sprite climb = null, Sprite floor = null)
+            private static HatBehaviour CreateHat(Sprite sprite, Sprite climb = null, Sprite floor = null, bool bounce = false)
             {
                 var newHat = ScriptableObject.CreateInstance<HatBehaviour>();
                 newHat.MainImage = sprite;
                 newHat.ProductId = $"hat_{sprite.name}";
                 newHat.Order = 99 + HatID;
                 newHat.InFront = true;
-                newHat.NoBounce = true;
+                newHat.NoBounce = bounce;
                 newHat.FloorImage = floor;
                 newHat.ClimbImage = climb;
                 newHat.ChipOffset = new Vector2(-0.1f, 0.4f);
