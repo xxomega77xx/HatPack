@@ -1,55 +1,62 @@
-﻿using System.Linq;
-using HarmonyLib;
+﻿using HarmonyLib;
 namespace HatPack
 {
     [HarmonyPatch(typeof(PingTracker), nameof(PingTracker.Update))]
     public static class PingUpdateTracker
     {
-        //private static string GenerateHatText(HatPackPlugin.HatData data)
-        //{
-        //    if (data.name.Contains("vadar"))
-        //    {
-        //        return
-        //            "\n Vadar Hat by Wong";
-        //    }
-        //    if (data.name.Contains("poly"))
-        //    {
-        //        return
-        //            "\n Polywrath Hat by Wong";
-        //    }
-        //    if (data.name.Contains("carrot"))
-        //    {
-        //        return
-        //            "\n Carrot Hat by Wong";
-        //    }
-        //    if (data.name.Contains("raddish"))
-        //    {
-        //        return
-        //            "\n raddish Hat by Wong";
-        //    }
-        //    if (data.name.Contains("jhin"))
-        //    {
-        //        return
-        //            "\n jhin Hat by Wong";
-        //    }
-        //    if (data.name.Contains("panda"))
-        //    {
-        //        return
-        //            "\n panda Hat by Wong";
-        //    }
-        //    if (data.name.Contains("reaper"))
-        //    {
-        //        return
-        //            "\n reaper Hat by Berg";
-        //    }
-        //    return $"\n{data.name} hat by {data.author}";
-        //}
+
+        private static string GenerateHatText(HatPackPlugin.AuthorData data)
+        {
+            if (data.HatName.Contains("vadar"))
+            {
+                return
+                    "\n Vadar Hat by Wong";
+            }
+            if (data.HatName.Contains("poly"))
+            {
+                return
+                    "\n Polywrath Hat by Wong";
+            }
+            if (data.HatName.Contains("carrot"))
+            {
+                return
+                    "\n Carrot Hat by Wong";
+            }
+            if (data.HatName.Contains("raddish"))
+            {
+                return
+                    "\n Raddish Hat by Wong";
+            }
+            if (data.HatName.Contains("jhin"))
+            {
+                return
+                    "\n Jhin Hat by Wong";
+            }
+            if (data.HatName.Contains("panda"))
+            {
+                return
+                    "\n Panda Hat by Wong";
+            }
+            if (data.HatName.Contains("reaper"))
+            {
+                return
+                    "\n Reaper Hat by Berg";
+            }
+            return $"\n{data.HatName} hat by {data.AuthorName}";
+        }
         public static void Postfix(PingTracker __instance)
         {
 
             if (!MeetingHud.Instance)
             {
-                __instance.text.text += "\nHatPack\nv1.5.0\ncreated by Om3ga";                
+                __instance.text.text += "\nHatPack v1.6.0 created by Om3ga";
+                if (HatPackPlugin.IdToData.ContainsKey(PlayerControl.LocalPlayer.Data.HatId))
+                {
+                    var data = HatPackPlugin.IdToData[PlayerControl.LocalPlayer.Data.HatId];
+
+
+                    __instance.text.text += GenerateHatText(data);
+                }
             }
         }
     }

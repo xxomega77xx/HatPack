@@ -2,12 +2,12 @@
 using BepInEx.IL2CPP;
 using HarmonyLib;
 using Reactor;
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
-
+//code examples borrowed from townofus creators
 namespace HatPack
 {
-    [BepInPlugin(Id , "HatPack", "1.5.0")]
+    [BepInPlugin(Id , "HatPack", "1.6.0")]
     [BepInProcess("Among Us.exe")]
     [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
@@ -22,6 +22,29 @@ namespace HatPack
             Assets.LoadAssetBundle();
             Harmony.PatchAll();
         }
+
+        protected internal struct AuthorData
+        {
+            public string AuthorName;
+            public string HatName;
+            public string FloorHatName;
+            public string ClimbHatName;
+            public bool bounce;
+        }
+        //Be sure to spell everything right or it will not load all hats after spelling error
+        private static List<AuthorData> authorDatas = new List<AuthorData>()
+        {
+            new AuthorData {AuthorName = "Wong", HatName = "vadar",FloorHatName = "vadar.dead", ClimbHatName = "vadar.climb", bounce = true},
+            new AuthorData {AuthorName = "Wong", HatName = "panda", bounce = false },
+            new AuthorData {AuthorName = "Wong", HatName = "carrot", bounce = false},
+            new AuthorData {AuthorName = "Wong", HatName = "raddish" , bounce = false},
+            new AuthorData {AuthorName = "Wong", HatName = "jhin",FloorHatName = "jhin.dead", ClimbHatName = "jhin.climb", bounce = false},
+            new AuthorData {AuthorName = "Wong",HatName = "poly",FloorHatName = "poly.dead", ClimbHatName = "poly.climb", bounce = true},
+            new AuthorData {AuthorName = "Berg", HatName = "reaper",FloorHatName = "reaper.dead", ClimbHatName = "reaper.climb", bounce = false}
+        };
+
+        internal static Dictionary<uint, AuthorData> IdToData = new Dictionary<uint, AuthorData>();
+
         private static bool _customHatsLoaded = false;        
         [HarmonyPatch(typeof(HatManager), nameof(HatManager.GetHatById))]
         public static class AddCustomHats
@@ -31,35 +54,32 @@ namespace HatPack
                 if (!_customHatsLoaded)
                 {
                     var allHats = HatManager.Instance.AllHats;
-
-                    var customHatNames = new[] { "panda", "carrot", "raddish", "reaper","jhin","vadar","poly" };
-                    string[] climbHatNames = { "reaper.climb","jhin.climb","vadar.climb","poly.climb" };
-                    string[] floorHatNames = { "reaper.dead","jhin.dead","vadar.dead","poly.dead" };
-                    string[] bouncehatNames = { "vadar", "poly" };
-                    
-                    foreach (string hatName in customHatNames)
+                                        
+                    foreach (var data in authorDatas)
                     {
                         HatID++;
-                        if (floorHatNames.Contains($"{hatName}.dead") && climbHatNames.Contains($"{hatName}.climb"))
+                        if (data.FloorHatName != null && data.ClimbHatName != null)
                         {
-                            string floorHat = $"{hatName}.dead";
-                            string climbHat = $"{hatName}.climb";
-                            if (bouncehatNames.Contains(hatName))
+                            System.Console.WriteLine($"Adding {data.HatName} and associated floor/climb hats");
+                            if (data.bounce)
                             {
-                                allHats.Add(CreateHat(GetSprite(hatName), GetSprite(climbHat), GetSprite(floorHat),true));
+                                System.Console.WriteLine($"Adding {data.HatName} with bounce enabled");
+                                allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName),true));
                             }
                             else
                             {
-                                allHats.Add(CreateHat(GetSprite(hatName), GetSprite(climbHat), GetSprite(floorHat)));
+                                System.Console.WriteLine($"Adding {data.HatName} with bounce disabled");
+                                allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName)));
                             }
                             
                         }
                         else
                         {
-                            allHats.Add(CreateHat(GetSprite(hatName)));
+                            System.Console.WriteLine($"Adding {data.HatName}");
+                            allHats.Add(CreateHat(GetSprite(data.HatName)));
                         }
+                        IdToData.Add((uint)HatManager.Instance.AllHats.Count - 1,data);
 
-                        
                         _customHatsLoaded = true;
                     }
 
