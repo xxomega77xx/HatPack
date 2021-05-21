@@ -10,12 +10,12 @@ namespace HatPack
             if (data.HatName.Contains("vadar"))
             {
                 return
-                    "\n Vadar Hat by Wong";
+                    "\n Vader Hat by Wong";
             }
             if (data.HatName.Contains("poly"))
             {
                 return
-                    "\n Polywrath Hat by Wong";
+                    "\n QuirtyXr Hat by Wong";
             }
             if (data.HatName.Contains("carrot"))
             {
@@ -37,6 +37,16 @@ namespace HatPack
                 return
                     "\n Panda Hat by Wong";
             }
+            if (data.HatName.Contains("sourlemon"))
+            {
+                return
+                    "\n Sour Lemon Hat by Wong";
+            }
+            if (data.HatName.Contains("lofi"))
+            {
+                return
+                    "\n Lofi Hat by Wong";
+            }
             if (data.HatName.Contains("reaper"))
             {
                 return
@@ -49,7 +59,7 @@ namespace HatPack
 
             if (!MeetingHud.Instance)
             {
-                __instance.text.text += "\nHatPack v1.7.0 created by Om3ga";
+                __instance.text.text += "\nHatPack v1.8.0 created by Om3ga";
                 if (HatPackPlugin.IdToData.ContainsKey(PlayerControl.LocalPlayer.Data.HatId))
                 {
                     var data = HatPackPlugin.IdToData[PlayerControl.LocalPlayer.Data.HatId];
