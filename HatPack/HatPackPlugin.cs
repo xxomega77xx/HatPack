@@ -7,7 +7,7 @@ using UnityEngine;
 //code examples borrowed from townofus creators
 namespace HatPack
 {
-    [BepInPlugin(Id , "HatPack", "1.8.0")]
+    [BepInPlugin(Id , "HatPack", "1.9.0")]
     [BepInProcess("Among Us.exe")]
     [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
@@ -42,7 +42,8 @@ namespace HatPack
             new AuthorData {AuthorName = "Wong", HatName = "poly",FloorHatName = "poly.dead", ClimbHatName = "poly.climb", bounce = true},
             new AuthorData {AuthorName = "Wong", HatName = "sourlemon",ClimbHatName="sourlemon.climb", bounce = false},
             new AuthorData {AuthorName = "Wong", HatName = "lofi",ClimbHatName="lofi.climb", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "reaper",FloorHatName = "reaper.dead", ClimbHatName = "reaper.climb", bounce = false}
+            new AuthorData {AuthorName = "Berg", HatName = "reaper",FloorHatName = "reaper.dead", ClimbHatName = "reaper.climb", bounce = false},
+            new AuthorData {AuthorName = "Angel/Wong", HatName = "rainbowhair", ClimbHatName = "rainbowhair.climb", bounce = false}
         };
 
         internal static Dictionary<uint, AuthorData> IdToData = new Dictionary<uint, AuthorData>();

@@ -47,6 +47,11 @@ namespace HatPack
                 return
                     "\n Lofi Hat by Wong";
             }
+            if (data.HatName.Contains("rainbowhair"))
+            {
+                return
+                    "\n WillFord Hat by Angel/Wong";
+            }
             if (data.HatName.Contains("reaper"))
             {
                 return
@@ -59,7 +64,7 @@ namespace HatPack
 
             if (!MeetingHud.Instance)
             {
-                __instance.text.text += "\nHatPack v1.8.0 created by Om3ga";
+                __instance.text.text += "\nHatPack v1.9.0 created by Om3ga";
                 if (HatPackPlugin.IdToData.ContainsKey(PlayerControl.LocalPlayer.Data.HatId))
                 {
                     var data = HatPackPlugin.IdToData[PlayerControl.LocalPlayer.Data.HatId];
