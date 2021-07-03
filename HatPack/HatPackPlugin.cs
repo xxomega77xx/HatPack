@@ -4,10 +4,10 @@ using HarmonyLib;
 using Reactor;
 using System.Collections.Generic;
 using UnityEngine;
-//code examples borrowed from townofus creators
+//code examples borrowed from townofus creators if it aint broke don't fix it LOL
 namespace HatPack
 {
-    [BepInPlugin(Id , "HatPack", "1.9.0")]
+    [BepInPlugin(Id , "HatPack", "2.0.0")]
     [BepInProcess("Among Us.exe")]
     [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
@@ -32,18 +32,19 @@ namespace HatPack
             public bool bounce;
         }
         //Be sure to spell everything right or it will not load all hats after spelling error
+        //Must be prefab name not name of asset for hatname
         private static List<AuthorData> authorDatas = new List<AuthorData>()
         {
-            new AuthorData {AuthorName = "Wong", HatName = "vadar",FloorHatName = "vadar.dead", ClimbHatName = "vadar.climb", bounce = true},
-            new AuthorData {AuthorName = "Wong", HatName = "panda", bounce = false },
-            new AuthorData {AuthorName = "Wong", HatName = "carrot", bounce = false},
-            new AuthorData {AuthorName = "Wong", HatName = "raddish" , bounce = false},
-            new AuthorData {AuthorName = "Wong", HatName = "jhin",FloorHatName = "jhin.dead", ClimbHatName = "jhin.climb", bounce = false},
-            new AuthorData {AuthorName = "Wong", HatName = "poly",FloorHatName = "poly.dead", ClimbHatName = "poly.climb", bounce = true},
-            new AuthorData {AuthorName = "Wong", HatName = "sourlemon",ClimbHatName="sourlemon.climb", bounce = false},
-            new AuthorData {AuthorName = "Wong", HatName = "lofi",ClimbHatName="lofi.climb", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "reaper",FloorHatName = "reaper.dead", ClimbHatName = "reaper.climb", bounce = false},
-            new AuthorData {AuthorName = "Angel/Wong", HatName = "rainbowhair", ClimbHatName = "rainbowhair.climb", bounce = false}
+            new AuthorData {AuthorName = "Berg", HatName = "birdhead", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "blackbirdhead", bounce = false },
+            new AuthorData {AuthorName = "Berg", HatName = "jess", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "murderghost" , bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "odaidenhat", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "Omega", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "reapercostume", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "reapermask", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "viking", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "vikingbeer", bounce = false}
         };
 
         internal static Dictionary<uint, AuthorData> IdToData = new Dictionary<uint, AuthorData>();
