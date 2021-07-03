@@ -5,60 +5,60 @@ namespace HatPack
     public static class PingUpdateTracker
     {
 
-        //private static string GenerateHatText(HatPackPlugin.AuthorData data)
-        //{
-        //    if (data.HatName.Contains("vadar"))
-        //    {
-        //        return
-        //            "\n Vader Hat by Wong";
-        //    }
-        //    if (data.HatName.Contains("poly"))
-        //    {
-        //        return
-        //            "\n QuirtyXr Hat by Wong";
-        //    }
-        //    if (data.HatName.Contains("carrot"))
-        //    {
-        //        return
-        //            "\n Carrot Hat by Wong";
-        //    }
-        //    if (data.HatName.Contains("raddish"))
-        //    {
-        //        return
-        //            "\n Raddish Hat by Wong";
-        //    }
-        //    if (data.HatName.Contains("jhin"))
-        //    {
-        //        return
-        //            "\n Jhin Hat by Wong";
-        //    }
-        //    if (data.HatName.Contains("panda"))
-        //    {
-        //        return
-        //            "\n Panda Hat by Wong";
-        //    }
-        //    if (data.HatName.Contains("sourlemon"))
-        //    {
-        //        return
-        //            "\n Sour Lemon Hat by Wong";
-        //    }
-        //    if (data.HatName.Contains("lofi"))
-        //    {
-        //        return
-        //            "\n Lofi Hat by Wong";
-        //    }
-        //    if (data.HatName.Contains("rainbowhair"))
-        //    {
-        //        return
-        //            "\n WillFord Hat by Angel/Wong";
-        //    }
-        //    if (data.HatName.Contains("reaper"))
-        //    {
-        //        return
-        //            "\n Reaper Hat by Berg";
-        //    }
-        //    return $"\n{data.HatName} hat by {data.AuthorName}";
-        //}
+        private static string GenerateHatText(HatPackPlugin.AuthorData data)
+        {
+            //if (data.HatName.Contains("birdhead"))
+            //{
+            //    return
+            //        "\n Birdhead Hat by Berg";
+            //}
+            //if (data.HatName.Contains("blackbirdhead"))
+            //{
+            //    return
+            //        "\n Blackbirdhead Hat by Berg";
+            //}
+            //if (data.HatName.Contains("jess"))
+            //{
+            //    return
+            //        "\n Jess Hat by Berg";
+            //}
+            //if (data.HatName.Contains("murderghost"))
+            //{
+            //    return
+            //        "\n murderghost Hat by Berg";
+            //}
+            //if (data.HatName.Contains("odaidenhat"))
+            //{
+            //    return
+            //        "\n Odaiden Hat by Berg";
+            //}
+            //if (data.HatName.Contains("Omega"))
+            //{
+            //    return
+            //        "\n Omega Hat by Berg";
+            //}
+            //if (data.HatName.Contains("reapercostume"))
+            //{
+            //    return
+            //        "\n Reaper Costume Hat by Berg";
+            //}
+            //if (data.HatName.Contains("reapermask"))
+            //{
+            //    return
+            //        "\n Reaper Mask Hat by Berg";
+            //}
+            //if (data.HatName.Contains("viking"))
+            //{
+            //    return
+            //        "\n Viking Hat by Berg";
+            //}
+            //if (data.HatName.Equals("vikingbeer"))
+            //{
+            //    return
+            //        "\n Viking w/ Beer Hat by Berg";
+            //}
+            return $"\n{data.HatName} hat by {data.AuthorName}";
+        }
         public static void Postfix(PingTracker __instance)
         {
 
@@ -70,7 +70,7 @@ namespace HatPack
                     var data = HatPackPlugin.IdToData[PlayerControl.LocalPlayer.Data.HatId];
 
 
-                    //__instance.text.text += GenerateHatText(data);
+                    __instance.text.text += GenerateHatText(data);
                 }
             }
         }
