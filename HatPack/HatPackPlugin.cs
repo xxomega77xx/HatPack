@@ -48,7 +48,7 @@ namespace HatPack
 
         internal static Dictionary<uint, AuthorData> IdToData = new Dictionary<uint, AuthorData>();
 
-        private static bool _customHatsLoaded = false;        
+        private static bool _customHatsLoaded = false;
         [HarmonyPatch(typeof(HatManager), nameof(HatManager.GetHatById))]
         public static class AddCustomHats
         {
@@ -57,7 +57,7 @@ namespace HatPack
                 if (!_customHatsLoaded)
                 {
                     var allHats = HatManager.Instance.AllHats;
-                                        
+
                     foreach (var data in authorDatas)
                     {
                         HatID++;
@@ -67,26 +67,26 @@ namespace HatPack
                             if (data.bounce)
                             {
                                 System.Console.WriteLine($"Adding {data.HatName} with bounce enabled");
-                                allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName),true));
+                                allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), true));
                             }
                             else
                             {
                                 System.Console.WriteLine($"Adding {data.HatName} with bounce disabled");
                                 allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName)));
                             }
-                            
+
                         }
                         else
                         {
                             System.Console.WriteLine($"Adding {data.HatName}");
                             allHats.Add(CreateHat(GetSprite(data.HatName)));
                         }
-                        IdToData.Add((uint)HatManager.Instance.AllHats.Count - 1,data);
+                        IdToData.Add((uint)HatManager.Instance.AllHats.Count - 1, data);
 
                         _customHatsLoaded = true;
                     }
 
-                    
+
 
                     _customHatsLoaded = true;
                 }

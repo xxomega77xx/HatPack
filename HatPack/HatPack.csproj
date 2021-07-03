@@ -1,34 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
-        <Version>1.9.0</Version>
-        <Mappings>DaemonBeast/Mappings:0.5.0</Mappings>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Version>1.9.0</Version>
+		<GameVersion>2021.6.15</GameVersion>
 
-        <Description>Custom streamer mod created for BergMiester</Description>
-        <Authors>Om3Ga</Authors>
-    </PropertyGroup>
+		<Description>Amoung us mod</Description>
+		<Authors>Om3ga</Authors>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(GamePlatform)' == 'Steam'">
-        <GameVersion>2021.5.10s</GameVersion>
-        <DefineConstants>$(DefineConstants);STEAM</DefineConstants>
-    </PropertyGroup>
+	<Target Name="Copy" AfterTargets="Build">
+		<Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFiles="$(AmongUs)/BepInEx/plugins/$(AssemblyName).dll" />
+	</Target>
 
-    <PropertyGroup Condition="'$(GamePlatform)' == 'Itch'">
-        <GameVersion>2021.5.10s</GameVersion>
-        <DefineConstants>$(DefineConstants);ITCH</DefineConstants>
-    </PropertyGroup>
+	<ItemGroup>
+		<Reference Include="$(AmongUs)\BepInEx\core\*.dll">
+			<Private>false</Private>
+		</Reference>
 
-    <ItemGroup>
-      <None Remove="HatPackAssets\assetbundle" />
-    </ItemGroup>
+		<Reference Include="$(AmongUs)\BepInEx\unhollowed\*.dll">
+			<Private>false</Private>
+		</Reference>
+		<EmbeddedResource Include="HatPackAssets\assetbundle" />
+		<Reference Remove="$(AmongUs)\BepInEx\unhollowed\netstandard.dll;$(AmongUs)\BepInEx\unhollowed\Newtonsoft.Json.dll" />
 
-    <ItemGroup>
-        <Deobfuscate Include="$(AmongUs)\BepInEx\plugins\Reactor-$(GameVersion).dll" />
-        <PackageReference Include="Reactor.OxygenFilter.MSBuild" Version="0.3.0" />
-        <EmbeddedResource Include="HatPackAssets\assetbundle" />
-    </ItemGroup>
-
-    <Target Name="Copy" AfterTargets="Reobfuscate">
-        <Copy SourceFiles="$(OutputPath)reobfuscated/$(AssemblyName)-$(GameVersion).dll" DestinationFolder="$(AmongUs)/BepInEx/plugins/" Condition="'$(Configuration)' == 'Debug'" />
-    </Target>
+		<Reference Include="$(AmongUs)\BepInEx\plugins\Reactor.dll" />
+	</ItemGroup>
 </Project>
