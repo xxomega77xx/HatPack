@@ -37,7 +37,7 @@ namespace HatPack
         {
             new AuthorData {AuthorName = "Berg", HatName = "birdhead", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "blackbirdhead", bounce = false },
-            new AuthorData {AuthorName = "Berg", HatName = "jess", bounce = false},
+            new AuthorData {AuthorName = "Angel", HatName = "jess", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "murderghost" , bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "odaidenhat", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "Omega", bounce = false},
