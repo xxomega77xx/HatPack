@@ -44,7 +44,8 @@ namespace HatPack
             new AuthorData {AuthorName = "Berg", HatName = "reapercostume", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "reapermask", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "viking", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "vikingbeer", bounce = false}
+            new AuthorData {AuthorName = "Berg", HatName = "vikingbeer", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "pineapple", bounce = false}
         };
 
         internal static Dictionary<uint, AuthorData> IdToData = new Dictionary<uint, AuthorData>();
