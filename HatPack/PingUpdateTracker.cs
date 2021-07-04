@@ -64,7 +64,7 @@ namespace HatPack
 
             if (!MeetingHud.Instance)
             {
-                __instance.text.text += "\nHatPack v2.0.0 created by Om3ga";
+                __instance.text.text += "\nHatPack v2.0.1 created by Om3ga";
                 if (HatPackPlugin.IdToData.ContainsKey(PlayerControl.LocalPlayer.Data.HatId))
                 {
                     var data = HatPackPlugin.IdToData[PlayerControl.LocalPlayer.Data.HatId];
