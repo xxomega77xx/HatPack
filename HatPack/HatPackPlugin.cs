@@ -41,11 +41,13 @@ namespace HatPack
             new AuthorData {AuthorName = "Berg", HatName = "murderghost" , bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "odaidenhat", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "Omega", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "reapercostume",FloorHatName ="reaperdead", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "reapermask",FloorHatName ="reaperdead", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "reapercostume",FloorHatName ="reaperdead",ClimbHatName = "reaperclimb", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "reapermask",FloorHatName ="reaperdead",ClimbHatName = "reaperclimb", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "viking", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "vikingbeer", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "pineapple", bounce = false},
+            //new AuthorData {AuthorName = "Berg", HatName = "willhair", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "vader",FloorHatName ="vaderdead",ClimbHatName = "vaderclimb", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "unclesam",FloorHatName ="unclesamdead", bounce = false}
         };
 
