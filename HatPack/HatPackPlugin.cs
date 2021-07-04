@@ -7,7 +7,7 @@ using UnityEngine;
 //code examples borrowed from townofus creators if it aint broke don't fix it LOL
 namespace HatPack
 {
-    [BepInPlugin(Id , "HatPack", "2.0.2")]
+    [BepInPlugin(Id , "HatPack", "2.0.3")]
     [BepInProcess("Among Us.exe")]
     [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
@@ -41,11 +41,12 @@ namespace HatPack
             new AuthorData {AuthorName = "Berg", HatName = "murderghost" , bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "odaidenhat", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "Omega", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "reapercostume", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "reapermask", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "reapercostume",FloorHatName ="reaperdead", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "reapermask",FloorHatName ="reaperdead", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "viking", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "vikingbeer", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "pineapple", bounce = false}
+            new AuthorData {AuthorName = "Berg", HatName = "pineapple", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "unclesam",FloorHatName ="unclesamdead", bounce = false}
         };
 
         internal static Dictionary<uint, AuthorData> IdToData = new Dictionary<uint, AuthorData>();
