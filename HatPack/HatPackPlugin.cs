@@ -7,11 +7,12 @@ using UnityEngine;
 //code examples borrowed from townofus creators if it aint broke don't fix it LOL
 namespace HatPack
 {
-    [BepInPlugin(Id , "HatPack", "2.0.3")]
+    [BepInPlugin(Id , "HatPack", Version)]
     [BepInProcess("Among Us.exe")]
     [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
     {
+        public const string Version = "2.0.4";
 
         public const string Id = "hats.pack";
 
@@ -48,7 +49,23 @@ namespace HatPack
             new AuthorData {AuthorName = "Berg", HatName = "pineapple", bounce = false},
             //new AuthorData {AuthorName = "Berg", HatName = "willhair", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "vader",FloorHatName ="vaderdead",ClimbHatName = "vaderclimb", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "unclesam",FloorHatName ="unclesamdead", bounce = false}
+            new AuthorData {AuthorName = "Berg", HatName = "unclesam",FloorHatName ="unclesamdead", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Bunpix", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Cadbury", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "CatEars", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DirtyBird", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DJ", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "EnbyScarf", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Espeon", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Gwendolyn", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Jester", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "PizzaRod", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Sombra", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Sprxk", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Swole", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "TransScarf", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Unicorn", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Wings", bounce = false}
         };
 
         internal static Dictionary<uint, AuthorData> IdToData = new Dictionary<uint, AuthorData>();
@@ -104,6 +121,7 @@ namespace HatPack
 
             private static HatBehaviour CreateHat(Sprite sprite, Sprite climb = null, Sprite floor = null, bool bounce = false)
             {
+                //var magicShader = DestroyableSingleton<HatManager>.Instance.AllHats[90].Cast<HatBehaviour>().AltShader;
                 var newHat = ScriptableObject.CreateInstance<HatBehaviour>();
                 newHat.MainImage = sprite;
                 newHat.ProductId = $"hat_{sprite.name}";
