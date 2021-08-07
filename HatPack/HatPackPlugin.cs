@@ -12,7 +12,7 @@ namespace HatPack
     [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
     {
-        public const string Version = "2.0.5";
+        public const string Version = "2.0.6";
 
         public const string Id = "hats.pack";
 
@@ -53,7 +53,7 @@ namespace HatPack
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Bunpix", bounce = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Cadbury", bounce = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "CatEars", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DirtyBird", bounce = false},
+            new AuthorData {AuthorName = "Angel", HatName = "dirtybirb", bounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "DJ", bounce = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "EnbyScarf", bounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Espeon", bounce = true},
