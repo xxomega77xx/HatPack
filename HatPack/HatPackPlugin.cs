@@ -72,9 +72,9 @@ namespace HatPack
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "SilverSylveon", bounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "DownyCrake", bounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Ram", bounce = false , altShader = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Kitsune", bounce = false, altShader = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "GlitchedSwole", bounce = false, altShader = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "TigerShark", bounce = false, altShader = true}
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Kitsune", bounce = true, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "GlitchedSwole", bounce = true, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "TigerShark", bounce = true, altShader = true}
         };
 
         internal static Dictionary<uint, AuthorData> IdToData = new Dictionary<uint, AuthorData>();
