@@ -12,7 +12,7 @@ namespace HatPack
     [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
     {
-        public const string Version = "2.0.8";
+        public const string Version = "2.0.9";
 
         public const string Id = "hats.pack";
 
@@ -70,7 +70,11 @@ namespace HatPack
             new AuthorData {AuthorName = "Paradox", HatName = "Dino", bounce = true, altShader=true},
             new AuthorData {AuthorName = "Berg", HatName = "Ugg", bounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "SilverSylveon", bounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DownyCrake", bounce = false}
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DownyCrake", bounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Ram", bounce = false , altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Kitsune", bounce = false, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "GlitchedSwole", bounce = false, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "TigerShark", bounce = false, altShader = true}
         };
 
         internal static Dictionary<uint, AuthorData> IdToData = new Dictionary<uint, AuthorData>();
