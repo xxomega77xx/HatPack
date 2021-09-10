@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using HarmonyLib;
-using Reactor.Extensions;
+﻿using System.Reflection;
+using HatPack.Extensions;
 using UnityEngine;
 
 namespace HatPack

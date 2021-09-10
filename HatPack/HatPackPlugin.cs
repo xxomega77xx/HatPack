@@ -1,7 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.IL2CPP;
 using HarmonyLib;
-using Reactor;
 using System.Collections.Generic;
 using UnityEngine;
 //code examples borrowed from townofus creators if it aint broke don't fix it LOL
@@ -9,10 +8,9 @@ namespace HatPack
 {
     [BepInPlugin(Id , "HatPack", Version)]
     [BepInProcess("Among Us.exe")]
-    [BepInDependency(ReactorPlugin.Id)]
     public class HatPackPlugin : BasePlugin
     {
-        public const string Version = "2.0.9";
+        public const string Version = "3.0.0";
 
         public const string Id = "hats.pack";
 
