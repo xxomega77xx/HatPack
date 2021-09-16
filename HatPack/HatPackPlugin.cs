@@ -10,7 +10,7 @@ namespace HatPack
     [BepInProcess("Among Us.exe")]
     public class HatPackPlugin : BasePlugin
     {
-        public const string Version = "3.0.1";
+        public const string Version = "3.1.0";
 
         public const string Id = "hats.pack";
 
@@ -22,12 +22,27 @@ namespace HatPack
             Harmony.PatchAll();
         }
 
+        public class HatExtension
+        {
+            public string condition { get; set; }
+            public Sprite FlipImage { get; set; }
+            public Sprite BackFlipImage { get; set; }
+
+            public bool isUnlocked()
+            {
+                if (condition == null || condition.ToLower() == "none")
+                    return true;
+                return false;
+            }
+        }
+
         protected internal struct AuthorData
         {
             public string AuthorName;
             public string HatName;
             public string FloorHatName;
             public string ClimbHatName;
+            public string LeftImageName;
             public bool bounce;
             public bool altShader;
         }
@@ -41,8 +56,8 @@ namespace HatPack
             new AuthorData {AuthorName = "Berg", HatName = "murderghost" , bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "odaidenhat", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "Omega", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "reapercostume",FloorHatName ="reaperdead",ClimbHatName = "reaperclimb", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "reapermask",FloorHatName ="reaperdead",ClimbHatName = "reaperclimb", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "reapercostume",FloorHatName ="reaperdead",ClimbHatName = "reaperclimb",LeftImageName = "reapercostumeleft", bounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "reapermask",FloorHatName ="reaperdead",ClimbHatName = "reaperclimb",LeftImageName = "reapermaskleft", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "viking", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "vikingbeer", bounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "pineapple", bounce = false},
@@ -91,26 +106,26 @@ namespace HatPack
                     {
                         HatID++;
 
-                        if (data.FloorHatName != null && data.ClimbHatName != null)
+                        if (data.FloorHatName != null && data.ClimbHatName != null && data.LeftImageName != null)
                         {
-                            System.Console.WriteLine($"Adding {data.HatName} and associated floor/climb hats");
+                            System.Console.WriteLine($"Adding {data.HatName} and associated floor/climb hats/left image");
                             if (data.bounce)
                             {
                                 if (data.altShader == true)
                                 {
                                     System.Console.WriteLine($"Adding {data.HatName} with Alt shaders and bounce");
-                                    allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), true, true));
+                                    allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), null, true, true));
                                 }
                                 else
                                 {
                                     System.Console.WriteLine($"Adding {data.HatName} with bounce enabled");
-                                    allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), true));
+                                    allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName),GetSprite(data.LeftImageName), true, false));
                                 }
                             }
                             else
                             {
                                 System.Console.WriteLine($"Adding {data.HatName} with bounce disabled");
-                                allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName)));
+                                allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), GetSprite(data.LeftImageName)));
                             }
 
                         }
@@ -119,7 +134,7 @@ namespace HatPack
                             if (data.altShader == true)
                             {
                                 System.Console.WriteLine($"Adding {data.HatName} with Alt shaders");
-                                allHats.Add(CreateHat(GetSprite(data.HatName), null, null, false, true));
+                                allHats.Add(CreateHat(GetSprite(data.HatName), null, null,null, false, true));
                             }
                             else
                             {
@@ -138,12 +153,12 @@ namespace HatPack
                 }
             }
 
-            private static Sprite GetSprite(string name)
+            public static Sprite GetSprite(string name)
                 => Assets.LoadAsset(name).Cast<GameObject>().GetComponent<SpriteRenderer>().sprite;
 
             private static int HatID = 0;
 
-            private static HatBehaviour CreateHat(Sprite sprite, Sprite climb = null, Sprite floor = null, bool bounce = false, bool altshader = false)
+            private static HatBehaviour CreateHat(Sprite sprite, Sprite climb = null, Sprite floor = null, Sprite leftimage = null, bool bounce = false, bool altshader = false)
             {
                 var magicShader = DestroyableSingleton<HatManager>.Instance.AllHats[90].Cast<HatBehaviour>().AltShader;
                 var newHat = ScriptableObject.CreateInstance<HatBehaviour>();
@@ -154,12 +169,52 @@ namespace HatPack
                 newHat.NoBounce = bounce;
                 newHat.FloorImage = floor;
                 newHat.ClimbImage = climb;
+                newHat.LeftMainImage = leftimage;
                 newHat.ChipOffset = new Vector2(-0.1f, 0.4f);
                 if(altshader == true) { newHat.AltShader = magicShader; }
 
                 return newHat;
             }
         }
+
+
+        //[HarmonyPatch(typeof(PlayerPhysics), nameof(PlayerPhysics.HandleAnimation))]
+        //private static class PlayerPhysicsHandleAnimationPatch
+        //{
+        //    private static void Postfix(PlayerPhysics __instance)
+        //    {
+        //        AnimationClip currentAnimation = __instance.Animator.GetCurrentAnimation();
+        //        if (currentAnimation == __instance.ClimbAnim || currentAnimation == __instance.ClimbDownAnim) return;
+        //        HatParent hp = __instance.myPlayer.HatRenderer;
+        //        if (hp.Hat == null) return;
+        //        foreach(var data in authorDatas)
+        //        {
+        //            if (data.LeftImageName != null)
+        //            {
+        //                if (__instance.rend.flipX)
+        //                {
+        //                    hp.FrontLayer.sprite = AddCustomHats.GetSprite(data.LeftImageName);
+        //                }
+        //                else
+        //                {
+        //                    hp.FrontLayer.sprite = hp.Hat.MainImage;
+        //                }
+        //            }
+        //            //if (data.BackFlipImage != null)
+        //            //{
+        //            //    if (__instance.rend.flipX)
+        //            //    {
+        //            //        hp.BackLayer.sprite = extend.BackFlipImage;
+        //            //    }
+        //            //    else
+        //            //    {
+        //            //        hp.BackLayer.sprite = hp.Hat.BackImage;
+        //            //    }
+        //            //}
+        //        }
+                
+        //    }
+        //}
 
     }
 }
