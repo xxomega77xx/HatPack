@@ -10,7 +10,7 @@ namespace HatPack
     [BepInProcess("Among Us.exe")]
     public class HatPackPlugin : BasePlugin
     {
-        public const string Version = "3.0.0";
+        public const string Version = "3.0.1";
 
         public const string Id = "hats.pack";
 
