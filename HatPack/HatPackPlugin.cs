@@ -6,11 +6,11 @@ using UnityEngine;
 //code examples borrowed from townofus creators if it aint broke don't fix it LOL
 namespace HatPack
 {
-    [BepInPlugin(Id , "HatPack", Version)]
+    [BepInPlugin(Id, "HatPack", Version)]
     [BepInProcess("Among Us.exe")]
     public class HatPackPlugin : BasePlugin
     {
-        public const string Version = "3.1.0";
+        public const string Version = "3.1.1";
 
         public const string Id = "hats.pack";
 
@@ -22,20 +22,6 @@ namespace HatPack
             Harmony.PatchAll();
         }
 
-        public class HatExtension
-        {
-            public string condition { get; set; }
-            public Sprite FlipImage { get; set; }
-            public Sprite BackFlipImage { get; set; }
-
-            public bool isUnlocked()
-            {
-                if (condition == null || condition.ToLower() == "none")
-                    return true;
-                return false;
-            }
-        }
-
         protected internal struct AuthorData
         {
             public string AuthorName;
@@ -43,51 +29,55 @@ namespace HatPack
             public string FloorHatName;
             public string ClimbHatName;
             public string LeftImageName;
-            public bool bounce;
+            public bool NoBounce;
             public bool altShader;
         }
         //Be sure to spell everything right or it will not load all hats after spelling error
         //Must be prefab name not name of asset for hatname
         private static List<AuthorData> authorDatas = new List<AuthorData>()
         {
-            new AuthorData {AuthorName = "Berg", HatName = "birdhead", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "blackbirdhead", bounce = false },
-            new AuthorData {AuthorName = "Angel", HatName = "jess", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "murderghost" , bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "odaidenhat", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "Omega", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "reapercostume",FloorHatName ="reaperdead",ClimbHatName = "reaperclimb",LeftImageName = "reapercostumeleft", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "reapermask",FloorHatName ="reaperdead",ClimbHatName = "reaperclimb",LeftImageName = "reapermaskleft", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "viking", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "vikingbeer", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "pineapple", bounce = false},
-            //new AuthorData {AuthorName = "Berg", HatName = "willhair", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "vader",FloorHatName ="vaderdead",ClimbHatName = "vaderclimb", bounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "unclesam",FloorHatName ="unclesamdead", bounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Bunpix", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Cadbury", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "CatEars", bounce = true},
-            new AuthorData {AuthorName = "Angel", HatName = "dirtybirb", bounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DJ", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "EnbyScarf", bounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Espeon", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Gwendolyn", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Jester", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "PizzaRod", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Sombra", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Sprxk", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Swole", bounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "TransScarf", bounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Unicorn", bounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Wings", bounce = false},
-            new AuthorData {AuthorName = "Paradox", HatName = "Dino", bounce = true, altShader=true},
-            new AuthorData {AuthorName = "Berg", HatName = "Ugg", bounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "SilverSylveon", bounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DownyCrake", bounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Ram", bounce = false , altShader = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Kitsune", bounce = true, altShader = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "GlitchedSwole", bounce = true, altShader = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "TigerShark", bounce = true, altShader = true}
+            new AuthorData {AuthorName = "Berg", HatName = "birdhead", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "blackbirdhead", NoBounce = false },
+            new AuthorData {AuthorName = "Angel", HatName = "jess", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "murderghost" , NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "odaidenhat", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "Omega", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "reapercostume",FloorHatName ="reaperdead",ClimbHatName = "reaperclimb",LeftImageName = "reapercostumeleft", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "reapermask",FloorHatName ="reaperdead",ClimbHatName = "reaperclimb",LeftImageName = "reapermaskleft", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "viking", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "vikingbeer", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "pineapple", NoBounce = false},
+            //new AuthorData {AuthorName = "Berg", HatName = "willhair", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "vader",FloorHatName ="vaderdead",ClimbHatName = "vaderclimb", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "unclesam",FloorHatName ="unclesamdead", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Bunpix", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Cadbury", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "CatEars", NoBounce = true},
+            new AuthorData {AuthorName = "Angel", HatName = "dirtybirb", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DJ", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "EnbyScarf", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Happy", NoBounce = false, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Carla", NoBounce = false, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Pika", NoBounce = false, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Gun", NoBounce = false, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Espeon", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Gwendolyn", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Jester", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "PizzaRod", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Sombra", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Sprxk", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Swole", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "TransScarf", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Unicorn", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Wings", NoBounce = false},
+            new AuthorData {AuthorName = "Paradox", HatName = "Dino", NoBounce = true, altShader=true},
+            new AuthorData {AuthorName = "Berg", HatName = "Ugg", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "SilverSylveon", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DownyCrake", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Ram", NoBounce = false , altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Kitsune", NoBounce = true, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "GlitchedSwole", NoBounce = true, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "TigerShark", NoBounce = true, altShader = true}
         };
 
         internal static Dictionary<uint, AuthorData> IdToData = new Dictionary<uint, AuthorData>();
@@ -109,7 +99,7 @@ namespace HatPack
                         if (data.FloorHatName != null && data.ClimbHatName != null && data.LeftImageName != null)
                         {
                             System.Console.WriteLine($"Adding {data.HatName} and associated floor/climb hats/left image");
-                            if (data.bounce)
+                            if (data.NoBounce)
                             {
                                 if (data.altShader == true)
                                 {
@@ -119,7 +109,7 @@ namespace HatPack
                                 else
                                 {
                                     System.Console.WriteLine($"Adding {data.HatName} with bounce enabled");
-                                    allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName),GetSprite(data.LeftImageName), true, false));
+                                    allHats.Add(CreateHat(GetSprite(data.HatName), GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), GetSprite(data.LeftImageName), true, false));
                                 }
                             }
                             else
@@ -134,7 +124,7 @@ namespace HatPack
                             if (data.altShader == true)
                             {
                                 System.Console.WriteLine($"Adding {data.HatName} with Alt shaders");
-                                allHats.Add(CreateHat(GetSprite(data.HatName), null, null,null, false, true));
+                                allHats.Add(CreateHat(GetSprite(data.HatName), null, null, null, false, true));
                             }
                             else
                             {
@@ -171,50 +161,10 @@ namespace HatPack
                 newHat.ClimbImage = climb;
                 newHat.LeftMainImage = leftimage;
                 newHat.ChipOffset = new Vector2(-0.1f, 0.4f);
-                if(altshader == true) { newHat.AltShader = magicShader; }
+                if (altshader == true) { newHat.AltShader = magicShader; }
 
                 return newHat;
             }
         }
-
-
-        //[HarmonyPatch(typeof(PlayerPhysics), nameof(PlayerPhysics.HandleAnimation))]
-        //private static class PlayerPhysicsHandleAnimationPatch
-        //{
-        //    private static void Postfix(PlayerPhysics __instance)
-        //    {
-        //        AnimationClip currentAnimation = __instance.Animator.GetCurrentAnimation();
-        //        if (currentAnimation == __instance.ClimbAnim || currentAnimation == __instance.ClimbDownAnim) return;
-        //        HatParent hp = __instance.myPlayer.HatRenderer;
-        //        if (hp.Hat == null) return;
-        //        foreach(var data in authorDatas)
-        //        {
-        //            if (data.LeftImageName != null)
-        //            {
-        //                if (__instance.rend.flipX)
-        //                {
-        //                    hp.FrontLayer.sprite = AddCustomHats.GetSprite(data.LeftImageName);
-        //                }
-        //                else
-        //                {
-        //                    hp.FrontLayer.sprite = hp.Hat.MainImage;
-        //                }
-        //            }
-        //            //if (data.BackFlipImage != null)
-        //            //{
-        //            //    if (__instance.rend.flipX)
-        //            //    {
-        //            //        hp.BackLayer.sprite = extend.BackFlipImage;
-        //            //    }
-        //            //    else
-        //            //    {
-        //            //        hp.BackLayer.sprite = hp.Hat.BackImage;
-        //            //    }
-        //            //}
-        //        }
-                
-        //    }
-        //}
-
     }
 }
