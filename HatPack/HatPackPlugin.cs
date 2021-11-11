@@ -10,7 +10,7 @@ namespace HatPack
     [BepInProcess("Among Us.exe")]
     public class HatPackPlugin : BasePlugin
     {
-        public const string Version = "3.1.1";
+        public const string Version = "3.1.2";
 
         public const string Id = "hats.pack";
 
@@ -37,6 +37,14 @@ namespace HatPack
         private static List<AuthorData> authorDatas = new List<AuthorData>()
         {
             new AuthorData {AuthorName = "Berg", HatName = "birdhead", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "Army", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "Navy", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "Marine", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "Airforce", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "a_pretty_sus", LeftImageName = "a_pretty_sus_left", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "ParadoxMonkey", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "Gina", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "imsus", LeftImageName = "imsus_left", NoBounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "blackbirdhead", NoBounce = false },
             new AuthorData {AuthorName = "Angel", HatName = "jess", NoBounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "murderghost" , NoBounce = false},
