@@ -167,6 +167,7 @@ namespace HatPack
                 newHat.NoBounce = bounce;
                 newHat.FloorImage = floor;
                 newHat.ClimbImage = climb;
+                newHat.Free = true;
                 newHat.LeftMainImage = leftimage;
                 newHat.ChipOffset = new Vector2(-0.1f, 0.4f);
                 if (altshader == true) { newHat.AltShader = magicShader; }
