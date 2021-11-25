@@ -2,7 +2,7 @@
 using BepInEx.IL2CPP;
 using HarmonyLib;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; 
 //code examples borrowed from townofus creators if it aint broke don't fix it LOL
 namespace HatPack
 {
@@ -10,7 +10,7 @@ namespace HatPack
     [BepInProcess("Among Us.exe")]
     public class HatPackPlugin : BasePlugin
     {
-        public const string Version = "3.1.2";
+        public const string Version = "3.2.0";
 
         public const string Id = "hats.pack";
 
@@ -158,11 +158,12 @@ namespace HatPack
 
             private static HatBehaviour CreateHat(Sprite sprite, Sprite climb = null, Sprite floor = null, Sprite leftimage = null, bool bounce = false, bool altshader = false)
             {
-                var magicShader = DestroyableSingleton<HatManager>.Instance.AllHats[90].Cast<HatBehaviour>().AltShader;
+                var magicShader = DestroyableSingleton<HatManager>.Instance.AllHats[99].Cast<HatBehaviour>().AltShader;
                 var newHat = ScriptableObject.CreateInstance<HatBehaviour>();
+                newHat.name = $"{sprite.name}";
                 newHat.MainImage = sprite;
-                newHat.ProductId = $"hat_{sprite.name}";
-                newHat.Order = 199 + HatID;
+                newHat.ProductId = "hat_" + sprite.name.Replace(' ', '_');
+                newHat.Order = 99 + HatID;
                 newHat.InFront = true;
                 newHat.NoBounce = bounce;
                 newHat.FloorImage = floor;
