@@ -59,7 +59,7 @@ namespace HatPack
             new AuthorData {AuthorName = "Berg", HatName = "vikingbeer", NoBounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "pineapple", NoBounce = false},
             //new AuthorData {AuthorName = "Berg", HatName = "willhair", NoBounce = false},
-            new AuthorData {AuthorName = "Berg", HatName = "vader",FloorHatName ="vaderdead",ClimbHatName = "vaderclimb", NoBounce = false},
+            new AuthorData {AuthorName = "Wong", HatName = "vader",FloorHatName ="vaderdead",ClimbHatName = "vaderclimb", NoBounce = false},
             new AuthorData {AuthorName = "Berg", HatName = "unclesam",FloorHatName ="unclesamdead", NoBounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Bunpix", NoBounce = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Cadbury", NoBounce = true},
@@ -187,8 +187,7 @@ namespace HatPack
                     }
                 }
                 var newHat = ScriptableObject.CreateInstance<HatBehaviour>();
-                newHat.name = $"{sprite.name}";
-                newHat.StoreName = author.ToString();
+                newHat.name = $"{sprite.name} by {author}";
                 newHat.MainImage = sprite;
                 newHat.ProductId = "hat_" + sprite.name.Replace(' ', '_');
                 newHat.Order = 99 + HatID;
