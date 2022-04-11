@@ -17,7 +17,7 @@ namespace HatPack
     {
 
         public static Material MagicShader;
-        public const string Version = "3.2.1";
+        public const string Version = "4.0.0";
 
         public const string Id = "hats.pack";
 
