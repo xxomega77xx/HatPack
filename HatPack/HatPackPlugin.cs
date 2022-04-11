@@ -4,6 +4,10 @@ using HarmonyLib;
 using BepInEx.Logging;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Object = UnityEngine.Object;
+using System.Linq;
+using TMPro;
 //code examples borrowed from townofus creators if it aint broke don't fix it LOL
 namespace HatPack
 {
@@ -112,23 +116,23 @@ namespace HatPack
 
                         if (data.FloorHatName != null && data.ClimbHatName != null && data.LeftImageName != null)
                         {
-                            CHLog.LogInfo($"Adding {data.HatName} and associated floor/climb hats/left image");
+                            //CHLog.LogInfo($"Adding {data.HatName} and associated floor/climb hats/left image");
                             if (data.NoBounce)
                             {
                                 if (data.altShader == true)
                                 {
-                                    CHLog.LogInfo($"Adding {data.HatName} with Alt shaders and bounce");
+                                    //CHLog.LogInfo("Adding {0} with Alt shaders and bounce",data.HatName);
                                     allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), null, true, true));
                                 }
                                 else
                                 {
-                                    CHLog.LogInfo($"Adding {data.HatName} with bounce enabled");
+                                    //CHLog.LogInfo($"Adding {data.HatName} with bounce enabled");
                                     allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), GetSprite(data.LeftImageName), true, false));
                                 }
                             }
                             else
                             {
-                                CHLog.LogInfo($"Adding {data.HatName} with bounce disabled");
+                                //CHLog.LogInfo($"Adding {data.HatName} with bounce disabled");
                                 allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), GetSprite(data.LeftImageName)));
                             }
 
@@ -137,12 +141,12 @@ namespace HatPack
                         {
                             if (data.altShader == true)
                             {
-                                CHLog.LogInfo($"Adding {data.HatName} with Alt shaders");
+                                //CHLog.LogInfo($"Adding {data.HatName} with Alt shaders");
                                 allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null, null, false, true));
                             }
                             else
                             {
-                                CHLog.LogInfo($"Adding {data.HatName}");
+                                //CHLog.LogInfo($"Adding {data.HatName}");
                                 allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName));
                             }
                         }
@@ -189,6 +193,7 @@ namespace HatPack
                 var newHat = ScriptableObject.CreateInstance<HatBehaviour>();
                 newHat.name = $"{sprite.name} by {author}";
                 newHat.MainImage = sprite;
+                newHat.StoreName = "HatPack";
                 newHat.ProductId = "hat_" + sprite.name.Replace(' ', '_');
                 newHat.Order = 99 + HatID;
                 newHat.InFront = true;
