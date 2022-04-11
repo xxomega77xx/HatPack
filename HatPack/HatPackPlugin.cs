@@ -4,10 +4,6 @@ using HarmonyLib;
 using BepInEx.Logging;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using Object = UnityEngine.Object;
-using System.Linq;
-using TMPro;
 //code examples borrowed from townofus creators if it aint broke don't fix it LOL
 namespace HatPack
 {
@@ -17,7 +13,7 @@ namespace HatPack
     {
 
         public static Material MagicShader;
-        public const string Version = "4.0.0";
+        public const string Version = "4.0.1";
 
         public const string Id = "hats.pack";
 
@@ -102,13 +98,13 @@ namespace HatPack
         public static class AddCustomHats
         {
 
-            public static void Prefix(PlayerControl __instance)
+            public static void Prefix(HatManager __instance)
             {
                 var CHLog = new ManualLogSource("HatPack");
                 BepInEx.Logging.Logger.Sources.Add(CHLog);
                 if (!_customHatsLoaded)
                 {
-                    var allHats = HatManager.Instance.AllHats;
+                    var allHats = DestroyableSingleton<HatManager>.Instance.allHats;
 
                     foreach (var data in authorDatas)
                     {
@@ -122,7 +118,7 @@ namespace HatPack
                                 if (data.altShader == true)
                                 {
                                     //CHLog.LogInfo("Adding {0} with Alt shaders and bounce",data.HatName);
-                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), null, true, true));
+                                    __instance.allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), null, true, true));
                                 }
                                 else
                                 {
@@ -150,7 +146,7 @@ namespace HatPack
                                 allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName));
                             }
                         }
-                        IdToData.Add(HatManager.Instance.AllHats.Count - 1, data);
+                        IdToData.Add(HatManager.Instance.allHats.Count - 1, data);
 
                         _customHatsLoaded = true;
                     }
@@ -176,34 +172,29 @@ namespace HatPack
             /// <param name="bounce"></param>
             /// <param name="altshader"></param>
             /// <returns>HatBehaviour</returns>
-            private static HatBehaviour CreateHat(Sprite sprite, string author, Sprite climb = null, Sprite floor = null, Sprite leftimage = null, bool bounce = false, bool altshader = false)
+            private static HatData CreateHat(Sprite sprite, string author, Sprite climb = null, Sprite floor = null, Sprite leftimage = null, bool bounce = false, bool altshader = false)
             {
                 //Borrowed from Other Roles to get hats alt shaders to work
-                if (MagicShader == null && DestroyableSingleton<HatManager>.InstanceExists)
-                {
-                    foreach (HatBehaviour h in DestroyableSingleton<HatManager>.Instance.AllHats)
-                    {
-                        if (h.AltShader != null)
-                        {
-                            MagicShader = h.AltShader;
-                            break;
-                        }
-                    }
+                if(MagicShader == null) {
+                    Material tmpShader = new Material("PlayerMaterial");
+                    tmpShader.shader = Shader.Find("Unlit/PlayerShader");
+                    MagicShader = tmpShader;
                 }
-                var newHat = ScriptableObject.CreateInstance<HatBehaviour>();
+                var newHat = ScriptableObject.CreateInstance<HatData>();
                 newHat.name = $"{sprite.name} by {author}";
-                newHat.MainImage = sprite;
+                newHat.hatViewData.viewData = ScriptableObject.CreateInstance<HatViewData>();
+                newHat.hatViewData.viewData.MainImage = sprite;
                 newHat.StoreName = "HatPack";
                 newHat.ProductId = "hat_" + sprite.name.Replace(' ', '_');
-                newHat.Order = 99 + HatID;
+                newHat.displayOrder = 99 + HatID;
                 newHat.InFront = true;
                 newHat.NoBounce = bounce;
-                newHat.FloorImage = floor;
-                newHat.ClimbImage = climb;
+                newHat.hatViewData.viewData.FloorImage = floor;
+                newHat.hatViewData.viewData.ClimbImage = climb;
                 newHat.Free = true;
-                newHat.LeftMainImage = leftimage;
+                newHat.hatViewData.viewData.LeftMainImage = leftimage;
                 newHat.ChipOffset = new Vector2(-0.1f, 0.4f);
-                if (altshader == true){ newHat.AltShader = MagicShader; }
+                if (altshader == true){ newHat.hatViewData.viewData.AltShader = MagicShader; }
 
                 return newHat;
             }

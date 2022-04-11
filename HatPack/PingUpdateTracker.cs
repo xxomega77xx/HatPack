@@ -14,14 +14,6 @@ namespace HatPack
             if (!MeetingHud.Instance)
             {
                 __instance.text.text += $"\nHatPack v{HatPackPlugin.Version} created by Om3ga";
-                //TODO : Fix author credits
-                //if (HatPackPlugin.IdToData.ContainsKey(PlayerControl.LocalPlayer.Data.DefaultOutfit.HatId))
-                //{
-                //    var data = HatPackPlugin.IdToData[PlayerControl.LocalPlayer.Data.DefaultOutfit.HatId];
-
-
-                //    __instance.text.text += GenerateHatText(data);
-                //}
 
             }
         }
