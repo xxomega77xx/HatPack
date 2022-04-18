@@ -63,7 +63,7 @@ namespace HatPack
             new AuthorData {AuthorName = "Berg", HatName = "unclesam",FloorHatName ="unclesamdead", NoBounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Bunpix", NoBounce = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Cadbury", NoBounce = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "CatEars", NoBounce = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "CatEars", NoBounce = true,altShader = true},
             new AuthorData {AuthorName = "Angel", HatName = "dirtybirb", NoBounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "DJ", NoBounce = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "EnbyScarf", NoBounce = false},
@@ -89,13 +89,13 @@ namespace HatPack
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Kitsune", NoBounce = true, altShader = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "GlitchedSwole", NoBounce = true, altShader = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "TigerShark", NoBounce = true, altShader = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Eevee_Female", NoBounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Eevee_Male", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Eevee_Female", NoBounce = false,altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Eevee_Male", NoBounce = false,altShader = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Crowned_Bluebelle", NoBounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Bluebow", NoBounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Boneskinner", NoBounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DjDolphin", NoBounce = false},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "OzzaMask", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DjDolphin", NoBounce = false,altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "OzzaMask", NoBounce = false,altShader = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "HornsofDevils", NoBounce = false}
         };
 
