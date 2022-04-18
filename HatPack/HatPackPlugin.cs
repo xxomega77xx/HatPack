@@ -13,7 +13,7 @@ namespace HatPack
     {
 
         public static Material MagicShader;
-        public const string Version = "4.0.1";
+        public const string Version = "4.0.2";
 
         public const string Id = "hats.pack";
 
@@ -88,7 +88,15 @@ namespace HatPack
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Ram", NoBounce = false , altShader = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Kitsune", NoBounce = true, altShader = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "GlitchedSwole", NoBounce = true, altShader = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "TigerShark", NoBounce = true, altShader = true}
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "TigerShark", NoBounce = true, altShader = true},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Eevee_Female", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Eevee_Male", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Crowned_Bluebelle", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Bluebow", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "Boneskinner", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "DjDolphin", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "OzzaMask", NoBounce = false},
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "HornsofDevils", NoBounce = false}
         };
 
         internal static Dictionary<int, AuthorData> IdToData = new Dictionary<int, AuthorData>();
