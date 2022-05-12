@@ -13,7 +13,7 @@ namespace HatPack
     {
 
         public static Material MagicShader;
-        public const string Version = "4.0.2";
+        public const string Version = "4.1.0";
 
         public const string Id = "hats.pack";
 
@@ -96,7 +96,8 @@ namespace HatPack
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "Boneskinner", NoBounce = false},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "DjDolphin", NoBounce = false,altShader = true},
             new AuthorData {AuthorName = "NightRaiderTea", HatName = "OzzaMask", NoBounce = false,altShader = true},
-            new AuthorData {AuthorName = "NightRaiderTea", HatName = "HornsofDevils", NoBounce = false}
+            new AuthorData {AuthorName = "NightRaiderTea", HatName = "HornsofDevils", NoBounce = false},
+            new AuthorData {AuthorName = "Berg", HatName = "Syziggy",LeftImageName = "syziggyleft" ,NoBounce = false}
         };
 
         internal static Dictionary<int, AuthorData> IdToData = new Dictionary<int, AuthorData>();
@@ -113,44 +114,58 @@ namespace HatPack
                 if (!_customHatsLoaded)
                 {
                     var allHats = DestroyableSingleton<HatManager>.Instance.allHats;
-
+                    CHLog.LogInfo("Adding hats from hatpack");
                     foreach (var data in authorDatas)
                     {
                         HatID++;
-
+                        
                         if (data.FloorHatName != null && data.ClimbHatName != null && data.LeftImageName != null)
                         {
-                            //CHLog.LogInfo($"Adding {data.HatName} and associated floor/climb hats/left image");
+                            CHLog.LogInfo("Adding " + data.HatName + " and associated floor/climb hats/left image");
                             if (data.NoBounce)
                             {
                                 if (data.altShader == true)
                                 {
-                                    //CHLog.LogInfo("Adding {0} with Alt shaders and bounce",data.HatName);
+                                    CHLog.LogInfo("Adding " + data.HatName + " with Alt shaders and bounce");
                                     __instance.allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), null, true, true));
                                 }
                                 else
                                 {
-                                    //CHLog.LogInfo($"Adding {data.HatName} with bounce enabled");
+                                    CHLog.LogInfo("Adding " + data.HatName + " with bounce enabled");
                                     allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), GetSprite(data.LeftImageName), true, false));
                                 }
-                            }
+                            }                            
                             else
                             {
-                                //CHLog.LogInfo($"Adding {data.HatName} with bounce disabled");
+                                CHLog.LogInfo("Adding " + data.HatName + " with bounce disabled");
                                 allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), GetSprite(data.LeftImageName)));
                             }
 
+                        }
+                        else if (data.HatName != null && data.LeftImageName != null && data.ClimbHatName == null && data.FloorHatName == null)
+                        {
+                            if (data.NoBounce)
+                            {
+                                CHLog.LogInfo("Adding " + data.HatName + " with bounce enabled and left image");
+                                allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null, GetSprite(data.LeftImageName), true));
+                            }
+                            else
+                            {
+                                //Add hat without bounce and leftimage
+                                CHLog.LogInfo("Adding " + data.HatName + " without bounce and left image" );
+                                allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null, GetSprite(data.LeftImageName), false));
+                            }
                         }
                         else
                         {
                             if (data.altShader == true)
                             {
-                                //CHLog.LogInfo($"Adding {data.HatName} with Alt shaders");
-                                allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null, null, false, true));
+                                CHLog.LogInfo("Adding " + data.HatName + " with Alt shaders");
+                                allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null, null, false, data.NoBounce));
                             }
                             else
                             {
-                                //CHLog.LogInfo($"Adding {data.HatName}");
+                                CHLog.LogInfo("Adding " + data.HatName);
                                 allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName));
                             }
                         }
@@ -183,7 +198,8 @@ namespace HatPack
             private static HatData CreateHat(Sprite sprite, string author, Sprite climb = null, Sprite floor = null, Sprite leftimage = null, bool bounce = false, bool altshader = false)
             {
                 //Borrowed from Other Roles to get hats alt shaders to work
-                if(MagicShader == null) {
+                if (MagicShader == null)
+                {
                     Material tmpShader = new Material("PlayerMaterial");
                     tmpShader.shader = Shader.Find("Unlit/PlayerShader");
                     MagicShader = tmpShader;
@@ -202,7 +218,7 @@ namespace HatPack
                 newHat.Free = true;
                 newHat.hatViewData.viewData.LeftMainImage = leftimage;
                 newHat.ChipOffset = new Vector2(-0.1f, 0.4f);
-                if (altshader == true){ newHat.hatViewData.viewData.AltShader = MagicShader; }
+                if (altshader == true) { newHat.hatViewData.viewData.AltShader = MagicShader; }
 
                 return newHat;
             }
