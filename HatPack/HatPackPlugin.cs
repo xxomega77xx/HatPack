@@ -14,7 +14,7 @@ namespace HatPack
     {
 
         public static Material MagicShader;
-        public const string Version = "4.1.1";
+        public const string Version = "4.1.2";
 
         public const string Id = "hats.pack";
 
@@ -133,18 +133,18 @@ namespace HatPack
                                     if (data.altShader == true)
                                     {
                                         CHLog.LogInfo("Adding " + data.HatName + " with Alt shaders and bounce");
-                                        __instance.allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName),null, null, true, true));
+                                        __instance.allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName),leftimage:null,back:null, true, true));
                                     }
                                     else
                                     {
                                         CHLog.LogInfo("Adding " + data.HatName + " with bounce enabled");
-                                        allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), GetSprite(data.LeftImageName),null, true, false));
+                                        allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName,climb:GetSprite(data.ClimbHatName),floor:GetSprite(data.FloorHatName),leftimage:GetSprite(data.LeftImageName),back:null,true, false));
                                     }
                                 }
                                 else
                                 {
                                     CHLog.LogInfo("Adding " + data.HatName + " with bounce disabled");
-                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, GetSprite(data.ClimbHatName), GetSprite(data.FloorHatName), GetSprite(data.LeftImageName)));
+                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName,climb:GetSprite(data.ClimbHatName),floor:GetSprite(data.FloorHatName),leftimage:GetSprite(data.LeftImageName)));
                                 }
 
                             }
@@ -153,13 +153,13 @@ namespace HatPack
                                 if (data.NoBounce)
                                 {
                                     CHLog.LogInfo("Adding " + data.HatName + " with bounce enabled and left image");
-                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null,null, GetSprite(data.LeftImageName), true));
+                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName,climb:null,floor:null,GetSprite(data.LeftImageName), back:null,true));
                                 }
                                 else
                                 {
                                     //Add hat without bounce and leftimage
                                     CHLog.LogInfo("Adding " + data.HatName + " without bounce and left image");
-                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null,null, GetSprite(data.LeftImageName), false));
+                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName,climb:null,floor:null,GetSprite(data.LeftImageName)));
                                 }
                             }
                             else if (data.HatName != null && data.BackImageName != null && data.LeftImageName == null && data.ClimbHatName == null && data.FloorHatName == null)
@@ -167,13 +167,13 @@ namespace HatPack
                                 if (data.NoBounce)
                                 {
                                     CHLog.LogInfo("Adding " + data.HatName + " with bounce enabled and back image");
-                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null, null, GetSprite(data.LeftImageName), true));
+                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, climb:null,floor:null,leftimage:null, back:GetSprite(data.BackImageName), true));
                                 }
                                 else
                                 {
                                     //Add hat without bounce and back image
                                     CHLog.LogInfo("Adding " + data.HatName + " without bounce and back image");
-                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null, null, null, GetSprite(data.BackImageName), false));
+                                    allHats.Add(CreateHat(GetSprite(data.HatName),data.AuthorName,climb:null ,floor:null,leftimage:null,GetSprite(data.BackImageName)));
                                 }
                             }
                             else
@@ -181,7 +181,7 @@ namespace HatPack
                                 if (data.altShader == true)
                                 {
                                     CHLog.LogInfo("Adding " + data.HatName + " with Alt shaders");
-                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, null, null, null,null, data.NoBounce, data.altShader));
+                                    allHats.Add(CreateHat(GetSprite(data.HatName), data.AuthorName, climb: null, floor: null, leftimage: null,back:null, data.NoBounce, data.altShader));
                                 }
                                 else
                                 {
@@ -236,6 +236,7 @@ namespace HatPack
                 newHat.hatViewData.viewData = ScriptableObject.CreateInstance<HatViewData>();
                 newHat.hatViewData.viewData.MainImage = sprite;
                 newHat.hatViewData.viewData.BackImage = back;
+                newHat.hatViewData.viewData.LeftBackImage = back;
                 newHat.StoreName = "HatPack";
                 newHat.ProductId = "hat_" + sprite.name.Replace(' ', '_');
                 newHat.displayOrder = 99 + HatID;

@@ -13,7 +13,7 @@ namespace HatPack
         {
             if (!MeetingHud.Instance)
             {
-                __instance.text.text += $"\nHatPack v{HatPackPlugin.Version} created by Om3ga";
+                __instance.text.text += $"\n<color=#00fff3>HatPack v{HatPackPlugin.Version} created by Om3ga</color>";
 
             }
         }
